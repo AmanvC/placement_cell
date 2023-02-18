@@ -1,0 +1,17 @@
+{
+  "name": "placement_details",
+  "version": "1.0.0",
+  "description": "A web app to manage students and their placements.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aman Varshney",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.2",
+    "nodemon": "^2.0.20"
+  }
+}
