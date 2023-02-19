@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    return res.render('test');
+    res.redirect('/employee/login');
 })
+router.use('/employee', require('./employee'));
 
 module.exports = router;
