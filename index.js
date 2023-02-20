@@ -9,6 +9,7 @@ const app = express();
 const port = 5000;
 
 app.use(expressLayouts);
+app.use(express.static('assets'));
 
 app.set('view engine', 'ejs');
 app.set('views', './views');

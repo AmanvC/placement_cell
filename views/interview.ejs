@@ -1,22 +1,78 @@
-<h1>Interview ID <%= interview %></h1>
+<h1>Interview Details</h1>
+<h2>
+    Comapny Name: <%= interview.company %>,
+    Date of visit: <%= interview.date_of_visit.toLocaleDateString() %>
+</h2>
 
 <h3>Unregistered Students</h3>
 <form action="/employee/dashboard/interview/update" method="POST">
-    <input type="hidden" name="interview" value="<%= interview %>">
+    <input type="hidden" name="interview" value="<%= interview.id %>">
 
-    <% unregisteredStudents.forEach((student, index) => { %>
+    <% for (let student of unregisteredStudents) { %>
             
         <label>
-            <input type="checkbox" name="student<%= index %>" value="<%= student.id %>">
+            <input type="checkbox" name="student" value="<%= student._id %>">
             <%= student.name %>
         </label>
 
-    <% }) %>
-    <button>Submit</button>
+    <% } %>
+    <% if(unregisteredStudents.length !== 0){ %>
+        <button>Submit</button>    
+    <% }else{ %>
+        <p>All students are registered for this interview.</p>    
+    <% } %>
 </form>
 <hr>
 
 <h3>Registered Students</h3>
-
-
-
+<form action="/employee/dashboard/interview/update-registered" method="POST">
+    <input type="hidden" name="interviewID" value="<%= interview.id %>">
+    <% for(let student of registeredStudents){ %>
+        <p><%= student.student.name %></p>
+        <label>
+            <% if(student.result === 'Registered'){ %>
+                <input type="radio" name="<%= student.id %>" value="Registered" checked>    
+            <% }else{ %>
+                <input type="radio" name="<%= student.id %>" value="Registered">    
+            <% } %>
+            Registered
+        </label>
+        <label>
+            <% if(student.result === 'Pass'){ %>
+                <input type="radio" name="<%= student.id %>" value="Pass" checked>    
+            <% }else{ %>
+                <input type="radio" name="<%= student.id %>" value="Pass">    
+            <% } %>
+            Pass
+        </label>
+        <label>
+            <% if(student.result === 'Fail'){ %>
+                <input type="radio" name="<%= student.id %>" value="Fail" checked>    
+            <% }else{ %>
+                <input type="radio" name="<%= student.id %>" value="Fail">    
+            <% } %>
+            Fail
+        </label>
+        <label>
+            <% if(student.result === 'On Hold'){ %>
+                <input type="radio" name="<%= student.id %>" value="On Hold" checked>    
+            <% }else{ %>
+                <input type="radio" name="<%= student.id %>" value="On Hold">    
+            <% } %>
+            On Hold
+        </label>
+        <label>
+            <% if(student.result === "Didn't Attempt"){ %>
+                <input type="radio" name="<%= student.id %>" value="Didn't Attempt" checked>    
+            <% }else{ %>
+                <input type="radio" name="<%= student.id %>" value="Didn't Attempt">    
+            <% } %>
+            Didn't Attempt
+        </label>
+    <% } %>
+    <% if(registeredStudents.length !== 0){ %>
+        <button>Submit</button>    
+    <% }else{ %>
+        <p>No students are registered for this interview.</p>    
+    <% } %>
+</form>
