@@ -4,7 +4,7 @@
 
 <ul>
     <% locals.students.forEach(student => { %>
-        <li><%= student.name %></li>
+        <li><a href="/employee/dashboard/student/<%= student.id %>"><%= student.name %></a></li>
     <% }) %>
 </ul>
 <br><hr>

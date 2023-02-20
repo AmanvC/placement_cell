@@ -38,6 +38,30 @@ module.exports.update = async function(req, res){
 }
 
 module.exports.updateRegistered = async function(req, res){
-    console.log(req.body);
+    const formData = req.body;
+    const keys = Object.keys(formData).splice(1);
+    const newData = keys.map(key => {
+        return {
+            student: key,
+            result: formData[key]
+        }
+    });
+    await Result.findOneAndUpdate({interview: formData.interviewID}, {students: newData});
+    const newResult = await Result.findOne({interview: formData.interviewID});
+    let placed = [];
+    newResult.students.forEach(student => {
+        if(student.result == 'Pass'){
+            placed.push(student.student);
+        }
+    })
+    
+    placed.map(student => {
+        changePlacedStatus(student);
+    })
+
     return res.redirect('back');
+}
+
+async function changePlacedStatus(student){
+    await Student.findByIdAndUpdate(student, {status: "Placed"});
 }

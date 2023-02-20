@@ -31,41 +31,41 @@
         <p><%= student.student.name %></p>
         <label>
             <% if(student.result === 'Registered'){ %>
-                <input type="radio" name="<%= student.id %>" value="Registered" checked>    
+                <input type="radio" name="<%= student.student.id %>" value="Registered" checked>    
             <% }else{ %>
-                <input type="radio" name="<%= student.id %>" value="Registered">    
+                <input type="radio" name="<%= student.student.id %>" value="Registered">    
             <% } %>
             Registered
         </label>
         <label>
             <% if(student.result === 'Pass'){ %>
-                <input type="radio" name="<%= student.id %>" value="Pass" checked>    
+                <input type="radio" name="<%= student.student.id %>" value="Pass" checked>    
             <% }else{ %>
-                <input type="radio" name="<%= student.id %>" value="Pass">    
+                <input type="radio" name="<%= student.student.id %>" value="Pass">    
             <% } %>
             Pass
         </label>
         <label>
             <% if(student.result === 'Fail'){ %>
-                <input type="radio" name="<%= student.id %>" value="Fail" checked>    
+                <input type="radio" name="<%= student.student.id %>" value="Fail" checked>    
             <% }else{ %>
-                <input type="radio" name="<%= student.id %>" value="Fail">    
+                <input type="radio" name="<%= student.student.id %>" value="Fail">    
             <% } %>
             Fail
         </label>
         <label>
             <% if(student.result === 'On Hold'){ %>
-                <input type="radio" name="<%= student.id %>" value="On Hold" checked>    
+                <input type="radio" name="<%= student.student.id %>" value="On Hold" checked>    
             <% }else{ %>
-                <input type="radio" name="<%= student.id %>" value="On Hold">    
+                <input type="radio" name="<%= student.student.id %>" value="On Hold">    
             <% } %>
             On Hold
         </label>
         <label>
             <% if(student.result === "Didn't Attempt"){ %>
-                <input type="radio" name="<%= student.id %>" value="Didn't Attempt" checked>    
+                <input type="radio" name="<%= student.student.id %>" value="Didn't Attempt" checked>    
             <% }else{ %>
-                <input type="radio" name="<%= student.id %>" value="Didn't Attempt">    
+                <input type="radio" name="<%= student.student.id %>" value="Didn't Attempt">    
             <% } %>
             Didn't Attempt
         </label>

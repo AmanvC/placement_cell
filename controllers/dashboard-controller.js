@@ -69,3 +69,16 @@ module.exports.createInterview = async function(req, res){
         return res.redirect('back');
     })
 }
+
+module.exports.studentProfile = async function(req, res){
+    const student = await Student.findById(req.params.id)
+    return res.render('profile', {
+        student: student
+    })
+}
+
+// Download Report
+// module.exports.downloadReport = function(req, res){
+//     console.log("DOWNLOAD REPORT");
+//     return res.redirect('back');
+// }
