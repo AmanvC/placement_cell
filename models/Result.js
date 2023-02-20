@@ -5,15 +5,16 @@ const resultSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Interview'
     },
-    student: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Student'
-    },
-    result: {
-        type: String,
-        enum: ["Pass", "Fail", "On Hold", "Didn't Attempt"],
-        required: true
-    }
+    students: [{
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student'
+        },
+        result: {
+            type: String,
+            enum: ["Pass", "Fail", "On Hold", "Didn't Attempt"]
+        }
+    }],
 }, {
     timestamps: true
 });

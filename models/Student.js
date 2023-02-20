@@ -9,7 +9,7 @@ const studentSchema = new mongoose.Schema({
         required: true
     },
     batch: {
-        type: Number,
+        type: String,
         required: true
     },
     college: {

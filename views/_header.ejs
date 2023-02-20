@@ -1,0 +1,29 @@
+<h1><a href="/employee/dashboard">Placement Cell</a></h1>
+<% if(locals.user){ %>
+    <a href="/employee/logout">Logout</a>    
+
+    <div>
+        <p>Create Student</p>
+        <form action="/employee/dashboard/create-student" method="POST">
+            <input type="text" name="name" placeholder="Student Name" required>
+            <input type="email" name="email" placeholder="Student Email" required>
+            <input type="text" name="batch" placeholder="Student Batch" required>
+            <input type="text" name="college" placeholder="Student College Name" required>
+            <input type="number" name="dsa" placeholder="DSA Score" required>
+            <input type="number" name="webd" placeholder="Web Development Score" required>
+            <input type="number" name="react" placeholder="React Score" required>
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <div>
+        <p>Create Interview</p>
+        <form action="/employee/dashboard/create-interview" method="POST">
+            <input type="text" name="company" placeholder="Company Name" required>
+            <input type="date" name="date_of_visit" required>
+            <button>Submit</button>
+        </form>
+    </div>
+
+<% } %>
+<hr><hr>

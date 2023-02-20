@@ -4,8 +4,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const port = 5000;
+
+app.use(expressLayouts);
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -16,7 +19,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 1000*60*15
+        maxAge: 1000*60*300
     },
     store: new MongoStore({
         mongooseConnection: db,

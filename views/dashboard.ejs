@@ -1,1 +1,20 @@
 <h1>DASHBOARD</h1>
+<hr><br>
+<h2>Students</h2>
+
+<ul>
+    <% locals.students.forEach(student => { %>
+        <li><%= student.name %></li>
+    <% }) %>
+</ul>
+<br><hr>
+<h2>Interviews</h2>
+
+<ul>
+    <% locals.interviews.forEach(interview => { %>
+        <li>
+            <a href="/employee/dashboard/interview/<%= interview.id %>"><%= interview.company %></a> &nbsp;
+            <small><%= interview.date_of_visit.toLocaleDateString() %></small>
+        </li>
+    <% }) %>
+</ul>

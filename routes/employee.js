@@ -11,7 +11,8 @@ router.post('/login/create-session', passport.authenticate(
     'local',
     {failureRedirect: '/employee/login'}
 ), employeesController.createSession);
+router.get('/logout', employeesController.destroySession);
 
-router.get('/dashboard', passport.checkAuthentication, employeesController.dashboard)
+router.use('/dashboard', require('./dashboard'));
 
 module.exports = router;

@@ -47,7 +47,12 @@ module.exports.createSession = function(req, res){
     return res.redirect('/employee/dashboard');
 }
 
-// Render dashboard page
-module.exports.dashboard = function(req, res){
-    return res.render('dashboard');
+module.exports.destroySession = function(req, res){
+    req.logout(function(err){
+        if(err){
+            console.log(`Error is logging out: ${err}`);
+            return res.redirect('back');
+        }
+    });
+    res.redirect('/employee/login');
 }

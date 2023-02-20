@@ -1,0 +1,22 @@
+<h1>Interview ID <%= interview %></h1>
+
+<h3>Unregistered Students</h3>
+<form action="/employee/dashboard/interview/update" method="POST">
+    <input type="hidden" name="interview" value="<%= interview %>">
+
+    <% unregisteredStudents.forEach((student, index) => { %>
+            
+        <label>
+            <input type="checkbox" name="student<%= index %>" value="<%= student.id %>">
+            <%= student.name %>
+        </label>
+
+    <% }) %>
+    <button>Submit</button>
+</form>
+<hr>
+
+<h3>Registered Students</h3>
+
+
+
