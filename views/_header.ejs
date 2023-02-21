@@ -1,42 +1,68 @@
-<h1><a href="/employee/dashboard">
+<link rel="stylesheet" href="/css/_header.css">
+
+<header>
+    <h1 class="click"><a href="/employee/dashboard">
+        <% if(locals.user){ %>
+            Dashboard
+        <% }else{ %>
+            Placement Cell    
+        <% } %>
+    </a></h1>
     <% if(locals.user){ %>
-        Dashboard
-    <% }else{ %>
-        Placement Cell    
+            
+    
+        <div id="create-student-container">
+            <div id="create-student-form">
+                <h1>Create Student</h1>
+                <span id="close-student" class="close"><i class="fa-solid fa-xmark"></i></span>
+                <form action="/employee/dashboard/create-student" method="POST">
+                    <p class="input-detail">Student Name:</p>
+                    <input type="text" name="name" placeholder="Student Name" required>
+                    <p class="input-detail">Student Email:</p>
+                    <input type="email" name="email" placeholder="Student Email" required>
+                    <p class="input-detail">Student Batch:</p>
+                    <input type="text" name="batch" placeholder="Student Batch" required>
+                    <p class="input-detail">College Name:</p>
+                    <input type="text" name="college" placeholder="Student College Name" required>
+                
+                    <input class="score" type="number" name="dsa" placeholder="DSA" required>
+                    <input class="score" type="number" name="webd" placeholder="Web Development" required>
+                    <input class="score" type="number" name="react" placeholder="React" required>
+                    
+                    <button>Add Student</button>
+                </form>
+            </div>
+        </div>
+    
+        <div id="create-interview-container">
+            <div id="create-interview-form">
+                <h1>Create Interview</h1>
+                <span id="close-interview" class="close"><i class="fa-solid fa-xmark"></i></span>
+                <form action="/employee/dashboard/create-interview" method="POST">
+                    <p class="input-detail">Company Name:</p>
+                    <input type="text" name="company" placeholder="Company Name" required>
+                    <p class="input-detail">Date Of Visit:</p>
+                    <input type="date" name="date_of_visit" required>
+                    <button>Add Interview</button>
+                </form>
+            </div>
+        </div>
+    
+        <div id="actions">
+
+            <button id="add-student" class="click">Add Student</button>
+
+            <button id="add-interview" class="click">Add Interview</button>
+            
+            <form action="/employee/dashboard/download-report" method="GET">
+                <button class="click">Download Report</button>
+            </form>
+
+            <a href="/employee/logout" id="logout" class="click">Logout</a>
+        </div>
+    
     <% } %>
-</a></h1>
-<% if(locals.user){ %>
-    <a href="/employee/logout">Logout</a>    
+    
+</header>
 
-    <div>
-        <p>Create Student</p>
-        <form action="/employee/dashboard/create-student" method="POST">
-            <input type="text" name="name" placeholder="Student Name" required>
-            <input type="email" name="email" placeholder="Student Email" required>
-            <input type="text" name="batch" placeholder="Student Batch" required>
-            <input type="text" name="college" placeholder="Student College Name" required>
-            <input type="number" name="dsa" placeholder="DSA Score" required>
-            <input type="number" name="webd" placeholder="Web Development Score" required>
-            <input type="number" name="react" placeholder="React Score" required>
-            <button>Submit</button>
-        </form>
-    </div>
-
-    <div>
-        <p>Create Interview</p>
-        <form action="/employee/dashboard/create-interview" method="POST">
-            <input type="text" name="company" placeholder="Company Name" required>
-            <input type="date" name="date_of_visit" required>
-            <button>Submit</button>
-        </form>
-    </div>
-
-
-    <form action="/employee/dashboard/download-report" method="GET">
-        <button>Download Report</button>
-    </form>
-
-<% } %>
-
-
-<hr><hr>
+<script src="/js/_header.js"></script>

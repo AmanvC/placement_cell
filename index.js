@@ -5,13 +5,23 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const expressLayouts = require('express-ejs-layouts');
+const sassMiddleware = require('node-sass-middleware');
 
 const app = express();
 const port = 5000;
 
 app.use(expressLayouts);
-app.use(express.static('assets'));
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: false,
+    outputStyle: 'compressed',
+    prefix: '/css'
+}));
+app.use(express.static('./assets'));
 
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
