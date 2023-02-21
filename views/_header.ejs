@@ -1,4 +1,10 @@
-<h1><a href="/employee/dashboard">Placement Cell</a></h1>
+<h1><a href="/employee/dashboard">
+    <% if(locals.user){ %>
+        Dashboard
+    <% }else{ %>
+        Placement Cell    
+    <% } %>
+</a></h1>
 <% if(locals.user){ %>
     <a href="/employee/logout">Logout</a>    
 
@@ -25,9 +31,12 @@
         </form>
     </div>
 
+
+    <form action="/employee/dashboard/download-report" method="GET">
+        <button>Download Report</button>
+    </form>
+
 <% } %>
 
-<form action="/employee/dashboard/download-report" method="GET">
-    <button>Download Report</button>
-</form>
+
 <hr><hr>
