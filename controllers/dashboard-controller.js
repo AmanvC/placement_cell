@@ -1,6 +1,8 @@
 const Student = require('../models/Student');
 const Interview = require('../models/Interview');
 const Result = require('../models/Result');
+const ObjectsToCsv = require('objects-to-csv');
+const fs = require('fs');
 
 // Render dashboard page
 module.exports.dashboard = async function(req, res){
@@ -71,7 +73,40 @@ module.exports.createInterview = async function(req, res){
 }
 
 // Download Report
-// module.exports.downloadReport = function(req, res){
-//     console.log("DOWNLOAD REPORT");
-//     return res.redirect('back');
-// }
+module.exports.downloadReport = async function(req, res){
+   const results = await Result.find({})
+    .populate('interview')
+    .populate('students.student');
+
+    // console.log(results[2].students[1].student.name);
+    const data = [];
+
+    results.map(result => {
+        result.students.map(student => {
+            const studentDetails = {
+                "Email": student.student.email,
+                "Name": student.student.name,
+                "College": student.student.college,
+                "Status": student.student.status,
+                "DSA Final Score": student.student.scores.dsa,
+                "Web Development Final Score": student.student.scores.webd,
+                "React Final Score": student.student.scores.react,
+                "Interview Company": result.interview.company,
+                "Interview Date": result.interview.date_of_visit.toLocaleDateString(),
+                "Interview Result": student.result
+            }
+            data.push(studentDetails);
+        })
+    })
+    const csv = new ObjectsToCsv(data);
+
+    // Save to file:
+    await csv.toDisk('./report.csv');
+    
+    // Return the CSV file as string:
+    // console.log(await csv.toString());
+
+    return res.download("./report.csv", () => {
+        fs.unlinkSync('./report.csv')
+    });
+}
