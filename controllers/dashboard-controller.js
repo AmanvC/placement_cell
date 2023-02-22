@@ -9,6 +9,7 @@ module.exports.dashboard = async function(req, res){
     const students = await Student.find({});
     const interviews = await Interview.find({}).sort('date_of_visit');
     interviews.forEach(interview => {
+        //change format of company name and date of visit
         interview.company = interview.company.charAt(0) + interview.company.slice(1).toLowerCase();
         interview.date_of_visit = interview.date_of_visit.toLocaleDateString();
     })
@@ -20,13 +21,16 @@ module.exports.dashboard = async function(req, res){
 
 // Create a Student
 module.exports.createStudent = async function(req, res){
+    //find student
     const student = await Student.findOne({email: req.body.email});
     if(student){
+        // If student already exists
         req.flash('error', 'Student already exists!');
         console.log('Student already exists!');
         return res.redirect('back');
     }
     const data = req.body;
+    // Create a new student
     Student.create({
         email: data.email,
         name: data.name,
@@ -55,6 +59,7 @@ module.exports.createInterview = async function(req, res){
         company: req.body.company.toUpperCase(),
         date_of_visit: req.body.date_of_visit
     }
+    // Find if interview already exist
     const interview = await Interview.findOne(formData);
     console.log(interview);
     if(interview){
@@ -62,6 +67,7 @@ module.exports.createInterview = async function(req, res){
         console.log(`Interview is already scheduled for ${req.body.company} on ${req.body.date_of_visit}!`);
         return res.redirect('back');
     }
+    // Create an interview
     Interview.create(formData, function(err, interview){
         if(err){
             req.flash('error', 'Error in creating interview!');
@@ -86,6 +92,7 @@ module.exports.downloadReport = async function(req, res){
 
     // console.log(results[2].students[1].student.name);
     const data = [];
+    // Generate result array
     results.map(result => {
         result.students.map(student => {
             const studentDetails = {
@@ -110,7 +117,10 @@ module.exports.downloadReport = async function(req, res){
     
     // Return the CSV file as string:
     // console.log(await csv.toString());
+
+    // Download the csv file
     return res.download("./report.csv", () => {
+        // Delete the temporary saved file
         fs.unlinkSync('./report.csv')
     });
 }
