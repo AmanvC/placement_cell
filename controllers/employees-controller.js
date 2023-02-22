@@ -28,7 +28,7 @@ module.exports.createEmployee = async function(req, res){
     }
     // If employee does not have work email, redirect back
     const domain = req.body.email.split('@')[1];
-    if(domain.toLowerCase() !== "codingninjas.com"){
+    if(domain.toLowerCase() !== "aurora.com"){
         req.flash('error', 'You are not authorized to signup!');
         console.log('User not authorized to signup!');
         return res.redirect('back');
