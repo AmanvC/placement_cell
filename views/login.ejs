@@ -2,27 +2,49 @@
 
 <div id="container">
 
+    <h1>Welcome to <span style="color: rgb(158, 64, 64)"> Placement</span> Cell!</h1>
+
     <div id="login-container">
-        <h1>LOGIN</h1>
+        <h1>Login</h1>
         <form action="/employee/login/create-session" method="POST">
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="password" name="password" placeholder="Your Password" required>
-            <button>Login</button>
+            <div class="input">
+                <p>Email</p>
+                <input type="text" name="email" placeholder="Your email" required >
+            </div>
+            <div class="input">
+                <p>Password</p>
+                <input type="password" name="password" placeholder="Your password" required>
+            </div>
+            <div class="actions">
+                <a>Click here to Signup</a>
+                <button>
+                    <span>Login</span>
+                </button>
+            </div>
         </form>
-        <a href="/employee/signup">Signup</a>
     </div>
     
     <div id="signup-container">
-        <h1>SIGNUP</h1>
-    
+        <h1>Signup</h1>
         <form action="/employee/signup/create" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="password" name="password" placeholder="Your password" required>
-            <button>Signup</button>
+            <div class="input">
+                <p>Name</p>
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="input">
+                <p>Email</p>
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="input">
+                <p>Password</p>
+                <input type="password" name="password" placeholder="Your password" required>
+            </div>
+            <div class="actions">
+                <button>Signup</button>
+            </div>
         </form>
-    
-        <a href="/employee/login">Login Here</a>
     </div>
 
 </div>
+
+<script src="/js/login.js"></script>
