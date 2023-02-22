@@ -17,6 +17,7 @@ module.exports.modifyInterview = async function(req, res){
         });
     }
     const interview = await Interview.findById(req.params.id);
+    interview.company = interview.company.charAt(0) + interview.company.slice(1).toLowerCase();
     return res.render('interview', {
         interview: interview,
         registeredStudents: result.students,
@@ -25,6 +26,9 @@ module.exports.modifyInterview = async function(req, res){
 }
 
 module.exports.update = async function(req, res){
+    if(!req.body.student){
+        return res.redirect('back');
+    }
     const result = await Result.findOne({interview: req.body.interview});
     if(typeof(req.body.student) === 'string'){
         result.students.push({student: req.body.student});
