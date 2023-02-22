@@ -2,6 +2,10 @@
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    
+    ::-webkit-scrollbar{
+        display: none;
+    } 
 }
 
 header{
@@ -19,8 +23,9 @@ header{
     >h1{
         font-size: 40px;
         padding: 10px 20px;
-        background-color: rgb(214, 97, 93);
-        border-radius: 30px;
+        // background-color: rgb(214, 97, 93);
+        text-shadow: 2px 5px 10px black;
+        // border-radius: 30px;
         margin-left: 20px;
     }
 

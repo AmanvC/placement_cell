@@ -1,39 +1,35 @@
-<style>
-    .Placed{
-        background-color: rgb(211, 255, 211);
-        padding: 2px 5px;
-        border-radius: 10px;
-        color: green;
-    }
+<link rel="stylesheet" href="/css/dashboard.css">
 
-    .Not.Placed{
-        background-color: rgb(255, 222, 222);
-        padding: 2px 5px;
-        border-radius: 10px;
-        color: red;
-    }
-</style>
-
-<h1>DASHBOARD</h1>
-<hr><br>
-<h2>Students</h2>
-
-<ul>
-    <% locals.students.forEach(student => { %>
-        <li>
-            <span><%= student.name %></span>
-            <small class="<%= student.status %>"><%= student.status %></small>
-        </li>
-    <% }) %>
-</ul>
-<br><hr>
-<h2>Interviews</h2>
-
-<ul>
-    <% locals.interviews.forEach(interview => { %>
-        <li>
-            <a href="/employee/dashboard/interview/<%= interview.id %>"><%= interview.company %></a> &nbsp;
-            <small><%= interview.date_of_visit.toLocaleDateString() %></small>
-        </li>
-    <% }) %>
-</ul>
+<section>
+    
+    <div id="registered-students">
+        <h1>Students</h1>
+    
+        <div>
+            <ul>
+                <% locals.students.forEach(student => { %>
+                    <li>
+                        <p><%= student.name %></p>
+                        <p>Status: <span class="<%= student.status %>"><%= student.status %></span></p>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+        
+    <div id="interviews">
+        <h1>Interviews</h1>
+        <div>
+            <ul>
+                <% locals.interviews.forEach(interview => { %>
+                    <a href="/employee/dashboard/interview/<%= interview.id %>">
+                        <li>
+                            <p><%= interview.company %></p>
+                            <p>Date of visit: <%= interview.date_of_visit.toLocaleDateString() %></p>
+                        </li>
+                    </a>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</section>

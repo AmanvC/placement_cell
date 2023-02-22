@@ -1,0 +1,109 @@
+
+section{
+    background-color: lightgray;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+
+    >div{
+        width: 40%;
+        height: calc(100vh - 150px);
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px gray;
+        overflow: hidden;
+        
+        h1{
+            font-size: 40px;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed black;
+        }
+    }
+
+    #registered-students{
+        
+        div{
+            height: 90%;
+            overflow: scroll;
+        }
+
+        ul{
+            li{
+                padding: 10px;
+                border: 1px dashed gray;
+                border-radius: 5px;
+                margin-bottom: 15px;
+
+                p:nth-child(1){
+                    font-size: 22px;
+                    margin-bottom: 5px;
+                }
+
+                p:nth-child(2){
+                    font-size: 14px;
+                }
+
+                .Placed{
+                    background-color: rgb(211, 255, 211);
+                    padding: 2px 5px;
+                    border-radius: 5px;
+                    color: green;
+                }
+
+                .Not.Placed{
+                    background-color: rgb(255, 222, 222);
+                    padding: 2px 5px;
+                    border-radius: 5px;
+                    color: red;
+                }
+            }
+        }
+    }
+
+    #interviews{
+
+        div{
+            height: 90%;
+            overflow: scroll;
+        }
+
+        ul{
+            
+            a{
+                text-decoration: none;
+                color: #000;
+
+                li{
+                    padding: 10px;
+                    border: 1px dashed gray;
+                    border-radius: 5px;
+                    margin-bottom: 15px;
+
+                    p:nth-child(1){
+                        font-size: 22px;
+                        margin-bottom: 5px;
+                    }
+    
+                    p:nth-child(2){
+                        font-size: 14px;
+                    }
+                }
+
+                &:hover{
+                    li{
+                        background-color: rgb(255, 230, 230);
+                        box-shadow: 5px 5px 10px gray;
+                    }
+                }
+            }
+        }
+    }
+}

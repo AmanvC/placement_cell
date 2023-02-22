@@ -80,7 +80,6 @@ module.exports.downloadReport = async function(req, res){
 
     // console.log(results[2].students[1].student.name);
     const data = [];
-
     results.map(result => {
         result.students.map(student => {
             const studentDetails = {
