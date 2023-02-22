@@ -28,7 +28,7 @@ module.exports.modifyInterview = async function(req, res){
 module.exports.update = async function(req, res){
     try{
         if(!req.body.student){
-            req.flash('error', 'Please select atleast one student.')
+            req.flash('error', 'Please select atleast one student to Register.')
             return res.redirect('back');
         }
         const result = await Result.findOne({interview: req.body.interview});
