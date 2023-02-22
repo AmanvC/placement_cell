@@ -9,4 +9,4 @@ Project Usage:
 3. To start project --- npm start
 4. Project will now be running on port 5000.
 
-Note: To register, register with condingninjas.com domain, for  example - example@codingninjas.com, it won't require email authentication.
+Note: To register, register with aurora.com domain, for  example - example@aurora.com, it won't require email authentication.
