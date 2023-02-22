@@ -26,44 +26,56 @@ module.exports.modifyInterview = async function(req, res){
 }
 
 module.exports.update = async function(req, res){
-    if(!req.body.student){
+    try{
+        if(!req.body.student){
+            req.flash('error', 'Please select atleast one student.')
+            return res.redirect('back');
+        }
+        const result = await Result.findOne({interview: req.body.interview});
+        if(typeof(req.body.student) === 'string'){
+            result.students.push({student: req.body.student});
+        }else{
+            req.body.student.forEach(stu => {
+                result.students.push({student: stu});
+            })
+        }
+        result.save();
+        req.flash('success', 'Selected students added to the interview.')
+        return res.redirect('back');
+    }catch(err){
+        req.flash('error', 'Something went wrong!');
         return res.redirect('back');
     }
-    const result = await Result.findOne({interview: req.body.interview});
-    if(typeof(req.body.student) === 'string'){
-        result.students.push({student: req.body.student});
-    }else{
-        req.body.student.forEach(stu => {
-            result.students.push({student: stu});
-        })
-    }
-    result.save();
-    return res.redirect('back');
 }
 
 module.exports.updateRegistered = async function(req, res){
-    const formData = req.body;
-    const keys = Object.keys(formData).splice(1);
-    const newData = keys.map(key => {
-        return {
-            student: key,
-            result: formData[key]
-        }
-    });
-    await Result.findOneAndUpdate({interview: formData.interviewID}, {students: newData});
-    const newResult = await Result.findOne({interview: formData.interviewID});
-    let placed = [];
-    newResult.students.forEach(student => {
-        if(student.result == 'Pass'){
-            placed.push(student.student);
-        }
-    })
-    
-    placed.map(student => {
-        changePlacedStatus(student);
-    })
-
-    return res.redirect('back');
+    try{
+        const formData = req.body;
+        const keys = Object.keys(formData).splice(1);
+        const newData = keys.map(key => {
+            return {
+                student: key,
+                result: formData[key]
+            }
+        });
+        await Result.findOneAndUpdate({interview: formData.interviewID}, {students: newData});
+        const newResult = await Result.findOne({interview: formData.interviewID});
+        let placed = [];
+        newResult.students.forEach(student => {
+            if(student.result == 'Pass'){
+                placed.push(student.student);
+            }
+        })
+        
+        placed.map(student => {
+            changePlacedStatus(student);
+        })
+        req.flash('success', 'Updated student results successfully.')
+        return res.redirect('back');
+    }catch(err){
+        req.flash('error', 'Something went wrong!')
+        return res.redirect('back');
+    }
 }
 
 async function changePlacedStatus(student){

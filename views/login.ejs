@@ -1,8 +1,28 @@
-<h1>LOGIN</h1>
+<link rel="stylesheet" href="/css/login.css">
 
-<form action="/employee/login/create-session" method="POST">
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Your Password" required>
-    <button>Login</button>
-</form>
-<a href="/employee/signup">Signup</a>
+<div id="container">
+
+    <div id="login-container">
+        <h1>LOGIN</h1>
+        <form action="/employee/login/create-session" method="POST">
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="password" name="password" placeholder="Your Password" required>
+            <button>Login</button>
+        </form>
+        <a href="/employee/signup">Signup</a>
+    </div>
+    
+    <div id="signup-container">
+        <h1>SIGNUP</h1>
+    
+        <form action="/employee/signup/create" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="password" name="password" placeholder="Your password" required>
+            <button>Signup</button>
+        </form>
+    
+        <a href="/employee/login">Login Here</a>
+    </div>
+
+</div>

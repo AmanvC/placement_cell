@@ -6,6 +6,8 @@ const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const expressLayouts = require('express-ejs-layouts');
 const sassMiddleware = require('node-sass-middleware');
+const flash = require('connect-flash');
+const flashMiddleware = require('./config/flash-middleware');
 
 const app = express();
 const port = 5000;
@@ -31,7 +33,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     cookie: {
-        maxAge: 1000*60*300
+        maxAge: 1000*60*15
     },
     store: new MongoStore({
         mongooseConnection: db,
@@ -46,6 +48,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(flashMiddleware.setFlash);
 
 app.use(express.urlencoded({extended: true}));
 

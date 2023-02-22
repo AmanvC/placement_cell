@@ -22,6 +22,7 @@ module.exports.dashboard = async function(req, res){
 module.exports.createStudent = async function(req, res){
     const student = await Student.findOne({email: req.body.email});
     if(student){
+        req.flash('error', 'Student already exists!');
         console.log('Student already exists!');
         return res.redirect('back');
     }
@@ -39,8 +40,10 @@ module.exports.createStudent = async function(req, res){
 
     }, function(err, student){
         if(err){
+            req.flash('error', 'Error in creating a student!');
             console.log(`Error in creating student: ${err}`);
         }
+        req.flash('success', `Student ${student.name} created successfully.`);
         return res.redirect('back');
     })
 }
@@ -55,11 +58,13 @@ module.exports.createInterview = async function(req, res){
     const interview = await Interview.findOne(formData);
     console.log(interview);
     if(interview){
+        req.flash('error', 'Interview already exists!');
         console.log(`Interview is already scheduled for ${req.body.company} on ${req.body.date_of_visit}!`);
         return res.redirect('back');
     }
     Interview.create(formData, function(err, interview){
         if(err){
+            req.flash('error', 'Error in creating interview!');
             console.log(`Error in creating an interview: ${err}`);
             return res.redirect('back');
         }
@@ -67,7 +72,8 @@ module.exports.createInterview = async function(req, res){
             if(err){
                 console.log(`Error in creating a result while creating an interview: ${err}`);
             }
-        })
+        });
+        req.flash('success', `Interview creadted successfull- Company: ${formData.company}, Date: ${formData.date_of_visit}`);
         return res.redirect('back');
     })
 }
@@ -104,7 +110,6 @@ module.exports.downloadReport = async function(req, res){
     
     // Return the CSV file as string:
     // console.log(await csv.toString());
-
     return res.download("./report.csv", () => {
         fs.unlinkSync('./report.csv')
     });
